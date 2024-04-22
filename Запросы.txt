@@ -1,0 +1,8 @@
+1) Выборки всех сотрудников:
+SELECT * FROM dbo.EmployeeTable;
+2) Сотрудников у кого зп выше 10000:
+SELECT * FROM dbo.EmployeeTable WHERE Salary > 10000;
+3) Удаления сотрудников старше 70 лет:
+DELETE FROM dbo.EmployeeTable WHERE DATEDIFF(year, BirthDate, CURRENT_TIMESTAMP) > 30;
+4) Обновить зп до 15000  тем сотрудникам, у которых она меньше:
+UPDATE dbo.EmployeeTable SET Salary = 15000 WHERE Salary < 15000;
