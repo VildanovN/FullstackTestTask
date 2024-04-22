@@ -1,0 +1,1 @@
+export { ngbDateType } from './ngbDateType';

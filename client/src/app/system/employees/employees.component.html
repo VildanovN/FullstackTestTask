@@ -1,0 +1,146 @@
+<p>Сотрудники</p>
+<form [formGroup]="filterForm">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">
+                    <p>Отдел</p>
+                    <div class="d-flex flex-row gap-2">
+                        <div class="form-group">
+                            <input
+                                class="form-control"
+                                formControlName="Department"
+                            >
+                        </div>
+                        <div class="btn" data-toggle="buttons" (click)="setSort(sortEnum.Department)">
+                            <i class="bi bi-sort-down"></i>
+                        </div>
+                    </div>
+                </th>
+                <th scope="col">
+                    <p>Ф.И.О.</p>
+                    <div class="d-flex flex-row gap-2">
+                        <div class="form-group">
+                            <input
+                                class="form-control"
+                                formControlName="FullName"
+                            >
+                        </div>
+                        <div class="btn" data-toggle="buttons" (click)="setSort(sortEnum.FullName)">
+                            <i class="bi bi-sort-down"></i>
+                        </div>
+                    </div>
+                </th>
+                <th scope="col">
+                    <p>Дата рождения</p>
+                    <div>
+                        <form class="form-group d-flex flex-row gap-2" formGroupName="BirthDate">
+                            <div class="input-group">
+                                <input
+                                    readonly
+                                    class="form-control"
+                                    id="birthDateStart"
+                                    formControlName="start"
+                                    ngbDatepicker
+                                    #d1="ngbDatepicker"
+                                >
+                                <button class="btn btn-outline-secondary" (click)="d1.toggle()" type="button">
+                                    <i class="bi bi-calendar"></i>
+                                </button>
+                            </div>
+                            <div class="input-group">
+                                <input
+                                    readonly
+                                    class="form-control"
+                                    id="birthDateEnd"
+                                    formControlName="end"
+                                    ngbDatepicker
+                                    #d2="ngbDatepicker"
+                                >
+                                <button class="btn btn-outline-secondary" (click)="d2.toggle()" type="button">
+                                    <i class="bi bi-calendar"></i>
+                                </button>
+                            </div>
+                            <div class="btn" data-toggle="buttons" (click)="setSort(sortEnum.BirthDate)">
+                                <i class="bi bi-sort-down"></i>
+                            </div>
+                        </form>
+                    </div>
+                </th>
+                <th scope="col">
+                    <p>Дата устройства на работу</p>
+                    <div>
+                        <form class="form-group d-flex flex-row gap-2" formGroupName="EmployeeDate">
+                            <div class="input-group">
+                                <input
+                                    readonly
+                                    class="form-control"
+                                    id="employeeDateStart"
+                                    formControlName="start"
+                                    ngbDatepicker
+                                    #d3="ngbDatepicker"
+                                >
+                                <button class="btn btn-outline-secondary" (click)="d3.toggle()" type="button">
+                                    <i class="bi bi-calendar"></i>
+                                </button>
+                            </div>
+                            <div class="input-group">
+                                <input
+                                    readonly
+                                    class="form-control"
+                                    id="employeeDateEnd"
+                                    formControlName="end"
+                                    ngbDatepicker
+                                    #d4="ngbDatepicker"
+                                >
+                                <button class="btn btn-outline-secondary" (click)="d4.toggle()" type="button">
+                                    <i class="bi bi-calendar"></i>
+                                </button>
+                            </div>
+                            <div class="btn" data-toggle="buttons" (click)="setSort(sortEnum.EmployeeDate)">
+                                <i class="bi bi-sort-down"></i>
+                            </div>
+                        </form>
+                    </div>
+                </th>
+                <th scope="col">
+                    <p>Заработная плата</p>
+                    <div class="d-flex flex-row gap-2">
+                        <div class="form-group">
+                            <input
+                                type="number"
+                                class="form-control"
+                                formControlName="Salary"
+                            >
+                        </div>
+                        <div class="btn" data-toggle="buttons" (click)="setSort(sortEnum.Salary)">
+                            <i class="bi bi-sort-down"></i>
+                        </div>
+                    </div>
+                </th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let employee of filterEmployees(employees)">
+                <td>{{ employee.Department }}</td>
+                <td>{{ employee.FullName }}</td>
+                <td>{{ employee.BirthDate | date : 'dd/MM/y' }}</td>
+                <td>{{ employee.EmployeeDate | date : 'dd/MM/y' }}</td>
+                <td>{{ employee.Salary }}</td>
+                <td class="d-flex flex-ro gap-2">
+                    <button class="btn btn-primary" (click)="edit(employee.Id)">Редактировать</button>
+                    <button class="btn btn-primary" (click)="delete(employee.Id)">Удалить</button>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="100%">
+                    <button class="btn btn-primary" (click)="open()">Создать</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>
+
+<app-delete-modal [open$]="delete$"></app-delete-modal>
+<app-employee-modal [open$]="open$"></app-employee-modal>

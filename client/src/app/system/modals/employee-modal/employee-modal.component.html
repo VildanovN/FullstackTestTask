@@ -1,0 +1,61 @@
+<ng-template #modal>
+    <form [formGroup]="employeeForm">
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="fullName">Ф.И.О.</label>
+                <input class="form-control" id="fullName" formControlName="FullName">
+            </div>
+            <div class="form-group">
+                <label for="department">Отдел</label>
+                <input class="form-control" id="department" formControlName="Department">
+            </div>
+            <div class="form-group">
+                <label for="birthDate">Дата рождения</label>
+                <div class="input-group">
+                    <input
+                        readonly
+                        class="form-control"
+                        id="birthDate"
+                        formControlName="BirthDate"
+                        ngbDatepicker
+                        #d1="ngbDatepicker"
+                    >
+                    <button class="btn btn-outline-secondary" (click)="d1.toggle()" type="button">
+                        <i class="bi bi-calendar"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="employeeDate">Дата трудоустройства</label>
+                <div class="input-group">
+                    <input
+                        readonly
+                        class="form-control"
+                        id="employeeDate"
+                        formControlName="EmployeeDate"
+                        ngbDatepicker
+                        #d2="ngbDatepicker"
+                    >
+                    <button class="btn btn-outline-secondary" (click)="d2.toggle()" type="button">
+                        <i class="bi bi-calendar"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="salary">Зарплата</label>
+                <input type="number" class="form-control" id="salary" formControlName="Salary">
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="close()">Закрыть</button>
+            <button
+                type="button"
+                class="btn btn-primary"
+                (click)="save()"
+                [disabled]="!employeeForm.valid"
+            >
+                {{ isEdit ? 'Изменить' : 'Создать' }}
+            </button>
+        </div>
+    </form>
+</ng-template>

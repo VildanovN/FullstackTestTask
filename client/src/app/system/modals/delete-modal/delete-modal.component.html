@@ -1,0 +1,15 @@
+<ng-template #modal>
+    <div class="modal-header">
+        <p>Вы действительно хотите удалить запись о работнике?</p>
+    </div>
+    <div class="modal-body d-flex flex-row justify-content-between">
+        <button type="button" class="btn btn-secondary" (click)="close()">Отменить</button>
+        <button
+            type="button"
+            class="btn btn-primary"
+            (click)="delete()"
+        >
+            Удалить
+        </button>
+    </div>
+</ng-template>
